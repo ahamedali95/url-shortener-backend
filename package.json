@@ -29,7 +29,7 @@
   },
   "pre-push": [
     "lint",
-    "check:typings"
+    "build:prod"
   ],
   "dependencies": {
     "express": "^4.17.1"

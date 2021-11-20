@@ -7,6 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Build stage is running..."
+                sh 'npm install'
                 sh 'npm run lint'
                 sh 'npm run build:prod'
             }
