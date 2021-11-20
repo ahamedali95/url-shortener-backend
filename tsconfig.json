@@ -15,7 +15,11 @@
     "declaration": false,
     "outDir": "./build",
     "moduleResolution": "node",
-    "module": "esnext"
+    "module": "esnext",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noUnusedLocals": true
   },
   "include": [
     "src"
