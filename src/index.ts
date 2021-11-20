@@ -1,1 +1,1 @@
-const a = "";
+export class A {}
