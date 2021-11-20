@@ -11,9 +11,9 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": false,
-    "isolatedModules": true,
-    "declaration": true,
-    "outDir": "./dist",
+    "isolatedModules": false,
+    "declaration": false,
+    "outDir": "./build",
     "moduleResolution": "node",
     "module": "esnext"
   },
