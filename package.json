@@ -25,7 +25,8 @@
     "test:watch": "jest --watchAll",
     "test": "jest --collectCoverage",
     "start": "tsc-watch --onSuccess \"node --experimental-modules ./build/index.js\"",
-    "build:prod": "tsc"
+    "build:prod": "tsc",
+    "deploy:dev": "./release.sh"
   },
   "pre-push": [
     "lint",
