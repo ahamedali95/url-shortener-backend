@@ -11,11 +11,15 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": false,
-    "isolatedModules": true,
-    "declaration": true,
-    "outDir": "./dist",
+    "isolatedModules": false,
+    "declaration": false,
+    "outDir": "./build",
     "moduleResolution": "node",
-    "module": "esnext"
+    "module": "esnext",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noUnusedLocals": true
   },
   "include": [
     "src"
