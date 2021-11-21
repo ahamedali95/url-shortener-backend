@@ -18,5 +18,15 @@ pipeline {
                 sh 'npm run test'
             }
         }
+        stage('Deploy to Dev') {
+            input {
+                message "Press Proceed to continue"
+            }
+
+            steps {
+                echo "Deploying to Dev"
+                sh 'npm run deploy:dev'
+            }
+        }
     }
 }

@@ -26,7 +26,8 @@
     "test": "jest --collectCoverage",
     "start": "tsc-watch --onSuccess \"node --experimental-modules ./build/index.js\"",
     "build:prod": "tsc",
-    "deploy:dev": "./release.sh"
+    "deploy:dev": "./release.sh",
+    "postinstall": "npm run build:prod"
   },
   "pre-push": [
     "lint",
