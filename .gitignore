@@ -8,3 +8,4 @@ ts-output
 compilation-stats.json
 *.iml
 logs
+.env

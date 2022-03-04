@@ -10,6 +10,8 @@
     "strict": true,
     "forceConsistentCasingInFileNames": false,
     "isolatedModules": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "declaration": false,
     "outDir": "./build",
     "moduleResolution": "node",
@@ -17,12 +19,17 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/main/urlProcessor/custom.d.ts"
+    ]
   },
   "include": [
-    "src/**/*"
+    "src/main/**/*"
   ],
   "exclude": [
     "node_modules",
+    "openAPI",
     "src/__tests__"
   ]
 }

@@ -1,7 +1,7 @@
 export const getJobs = {
-    tags: ['Jobs'],
-    description: "Returns all jobs in the system",
-    operationId: 'getJobs',
+    tags: ['Shorten URL'],
+    description: "Shorten the provided URL",
+    operationId: 'shortenUrl',
     security: [
         {
             bearerAuth: []
@@ -9,7 +9,7 @@ export const getJobs = {
     ],
     responses: {
         "200": {
-            description: "A list of jobs.",
+            description: "",
             content: {
                 "application/json": {
                     schema: {
