@@ -1,8 +1,6 @@
-name: CI-CD Integration/w Github Workflow
+name: Build & Deployment
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -16,16 +14,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+          uses: actions/setup-node@v1
+          with:
+            node-version: '14.18.2'
 
       - name: Installing dependencies
-        run: npm install
+        run: npm ci
 
       - name: Static analysis
         run: |
           echo "Running ESLint static analysis"
           npm run lint
-          echo "Running TypeScript static analysis"
+          echo "Performing TypeScript build"
           npm run build:prod
 
   analyze:
@@ -55,4 +59,22 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
+
+  deployment:
+    name: Deploy to Dev
+    runs-on: ubuntu-latest
+    environment: development
+
+    steps:
+      - name: Checkout repository
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "sholy"
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          branch: "master"
+          healthcheck: "https://sholy.herokuapp.com/health"
+        env:
+          HD_DB_CONNECT_URL: ${{secrets.DB_CONNECT_URL}}
 

@@ -25,9 +25,7 @@
     "test:watch": "jest --watchAll",
     "test": "jest --collectCoverage",
     "start": "rimraf ./build && tsc-watch --onSuccess \"cross-env NODE_ENV=dev node --experimental-modules --es-module-specifier-resolution=node ./build/src/main/urlProcessor/index.js\"",
-    "build:prod": "rimraf ./build && tsc",
-    "deploy:dev": "./release.sh",
-    "postinstall": "npm run build:prod"
+    "build:prod": "rimraf ./build && tsc"
   },
   "pre-push": [
     "lint",
