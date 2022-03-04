@@ -17,6 +17,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Installing dependencies
+        - run: npm install
+
       - name: Static analysis
         run: |
           echo "Running ESLint static analysis"
