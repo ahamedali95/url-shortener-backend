@@ -1,1 +1,1 @@
-web: node --experimental-modules --es-module-specifier-resolution=node ./build/src/main/index.js
+web: npm start
