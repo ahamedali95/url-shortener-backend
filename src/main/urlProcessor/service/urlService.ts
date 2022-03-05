@@ -11,7 +11,7 @@ export const shortenUrl = async (url: string): Promise<IUrl> => {
         const urlObj = new Model.Url({
             _id: id,
             longUrl: url,
-            shortUrl: `http://localhost:8080/${id}`
+            shortUrl: `https://sholy.herokuapp.com/${id}`
         });
         await urlObj.save();
 
