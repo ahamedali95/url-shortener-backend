@@ -10,6 +10,7 @@ on:
 
 jobs:
   build:
+    name: Build
     strategy:
       fail-fast: true
       matrix:
@@ -52,10 +53,31 @@ jobs:
         with:
           type: nodejs
 
-      - name: Perform SCA scan
+      - name: Run SCA scan
         uses: snyk/actions/node@master
         continue-on-error: true
         with:
           languages: ${{ matrix.node-version }}
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+  deployment:
+    name: Deploy to Dev
+    needs: [ build, security ]
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Release
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "sholy"
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          branch: "master"
+          healthcheck: "https://sholy.herokuapp.com/health"
+        env:
+          DB_CONNECT_URL: ${{secrets.DB_CONNECT_URL}}
