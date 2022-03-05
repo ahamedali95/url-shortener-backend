@@ -34,7 +34,10 @@ jobs:
           npm run build:prod
   security:
     name: Vulnerability Scan
+    needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: dev
     permissions:
       actions: read
       contents: read
@@ -53,6 +56,6 @@ jobs:
         uses: snyk/actions/node@master
         continue-on-error: true
         with:
-          languages: ${{ matrix.language }}
+          languages: ${{ matrix.node-version }}
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
