@@ -16,7 +16,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Use Node.js ${{ matrix.node-version }}
@@ -46,7 +45,6 @@ jobs:
         language: [ 'javascript' ]
 
     steps:
-      - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Initialize CodeQL
@@ -66,7 +64,6 @@ jobs:
     environment: development
 
     steps:
-      - name: Checkout repository
       - uses: actions/checkout@v2
 
       - name: Release
