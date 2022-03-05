@@ -11,6 +11,8 @@ jobs:
     name: Build
     strategy:
       fail-fast: true
+      matrix:
+        language: [ 'javascript' ]
     runs-on: ubuntu-latest
 
     steps:
