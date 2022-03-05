@@ -78,6 +78,6 @@ jobs:
           heroku_app_name: "sholy"
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           branch: "master"
-          healthcheck: "https://sholy.herokuapp.com/health"
+          healthcheck: "https://sholy.herokuapp.com/api/v1/health"
         env:
           HD_DB_CONNECT_URL: ${{secrets.DB_CONNECT_URL}}
