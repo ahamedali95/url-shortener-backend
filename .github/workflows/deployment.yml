@@ -18,12 +18,11 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Static analysis
-        run: [
-          echo "Running ESLint static analysis",
-          npm run lint,
-          echo "Running TypeScript static analysis",
+        run: |
+          echo "Running ESLint static analysis"
+          npm run lint
+          echo "Running TypeScript static analysis"
           npm run build:prod
-        ]
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
