@@ -24,8 +24,8 @@
     "lint:fix": "eslint src --fix",
     "test:watch": "jest --watchAll",
     "test": "jest --collectCoverage",
-    "start": "rimraf ./build && tsc-watch --onSuccess \"cross-env NODE_ENV=dev node --experimental-modules --es-module-specifier-resolution=node ./build/src/main/urlProcessor/index.js\"",
-    "build:prod": "rimraf ./build && tsc"
+    "start": "tsc-watch --onSuccess \"cross-env NODE_ENV=dev node --experimental-modules --es-module-specifier-resolution=node ./build/src/main/urlProcessor/index.js\"",
+    "build:prod": "tsc"
   },
   "pre-push": [
     "lint",
