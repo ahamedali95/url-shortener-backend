@@ -8,17 +8,13 @@ on:
 
   workflow_dispatch:
 
-strategy:
-  fail-fast: true
-  matrix:
-    node-version: [ '14.18.2' ]
-
-
-environment:
-  name: dev
-
 jobs:
   build:
+    strategy:
+      fail-fast: true
+      matrix:
+        node-version: [ '14.18.2' ]
+
     runs-on: ubuntu-latest
 
     steps:
@@ -37,7 +33,7 @@ jobs:
           echo "Running TypeScript static analysis"
           npm run build:prod
   security:
-    name: Vulnerability Scan
+    name: Security Scan
     needs: build
     runs-on: ubuntu-latest
     environment:
@@ -51,7 +47,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run Synk to check for vulnerabilities
+      - name: Run SAST scan
+        uses: AppThreat/sast-scan-action@v1.0.0
+        with:
+          type: nodejs
+
+      - name: Perform SCA scan
         uses: snyk/actions/node@master
         continue-on-error: true
         with:
