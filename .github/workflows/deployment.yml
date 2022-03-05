@@ -32,8 +32,8 @@ jobs:
           npm run lint
           echo "Running TypeScript static analysis"
           npm run build:prod
-  analyze:
-    name: Analyze
+  security:
+    name: Vulnerability Scan
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -49,13 +49,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v1
+      - name: Run Synk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        continue-on-error: true
         with:
           languages: ${{ matrix.language }}
-
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v1
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v1
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
