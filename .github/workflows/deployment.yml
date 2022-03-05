@@ -1,30 +1,37 @@
 name: Build & Deployment
-'on':
+
+on:
   pull_request:
-    branches:
-      - master
-  workflow_dispatch: null
+    branches: [ master ]
+
+  workflow_dispatch:
+
 jobs:
   build:
     name: Build
     strategy:
       fail-fast: true
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: 'Use Node.js ${{ matrix.node-version }}'
+
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: '${{ matrix.node-version }}'
+          node-version: ${{ matrix.node-version }}
+
       - name: Installing dependencies
         run: npm ci
+
       - name: Static analysis
         run: |
           echo "Running ESLint static analysis"
           npm run lint
           echo "Performing TypeScript build"
           npm run build:prod
+
   analyze:
     name: Vulnerability Scan
     runs-on: ubuntu-latest
@@ -32,35 +39,41 @@ jobs:
       actions: read
       contents: read
       security-events: write
+
     strategy:
       fail-fast: true
       matrix:
-        language:
-          - javascript
+        language: [ 'javascript' ]
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
         with:
-          languages: '${{ matrix.language }}'
+          languages: ${{ matrix.language }}
+
       - name: Autobuild
         uses: github/codeql-action/autobuild@v1
+
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
+
   deployment:
     name: Deploy to Dev
     runs-on: ubuntu-latest
     environment: development
+
     steps:
       - name: Checkout repository
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          heroku_api_key: '${{secrets.HEROKU_API_KEY}}'
-          heroku_app_name: sholy
-          heroku_email: '${{secrets.HEROKU_EMAIL}}'
-          branch: master
-          healthcheck: 'https://sholy.herokuapp.com/health'
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "sholy"
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          branch: "master"
+          healthcheck: "https://sholy.herokuapp.com/health"
         env:
-          DB_CONNECT_URL: '${{secrets.DB_CONNECT_URL}}'
+          DB_CONNECT_URL: ${{secrets.DB_CONNECT_URL}}
