@@ -11,9 +11,6 @@ jobs:
     name: Build
     strategy:
       fail-fast: true
-      matrix:
-        node-version: [12.x]
-
     runs-on: ubuntu-latest
 
     steps:
@@ -21,9 +18,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          languages: ${{ matrix.language }}
+          uses: actions/setup-node@v1
+          with:
+            node-version: '14.18.2'
 
       - name: Installing dependencies
         run: npm ci
@@ -46,7 +43,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        node-version: [12.x]
+        language: [ 'javascript' ]
 
     steps:
       - name: Checkout repository
@@ -79,5 +76,5 @@ jobs:
           branch: "master"
           healthcheck: "https://sholy.herokuapp.com/health"
         env:
-          HD_DB_CONNECT_URL: ${{secrets.DB_CONNECT_URL}}
+          DB_CONNECT_URL: ${{secrets.DB_CONNECT_URL}}
 
