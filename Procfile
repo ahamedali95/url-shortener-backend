@@ -1,1 +1,1 @@
-web: npm start
+web: node --experimental-modules --es-module-specifier-resolution=node ./build/src/main/urlProcessor/index.js
