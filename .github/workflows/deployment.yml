@@ -1,6 +1,8 @@
-name: Build & Deployment
+name: CI-CD Integration/w Github Workflow
 
 on:
+  push:
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -8,31 +10,22 @@ on:
 
 jobs:
   build:
-    name: Build
     strategy:
       fail-fast: true
-      matrix:
-        language: [ 'javascript' ]
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-
-      - name: Install dependencies
-        run: npm ci
-
       - name: Static analysis
-        run: |
-          echo "Running ESLint static analysis"
-          npm run lint
-          echo "Performing TypeScript build"
+        run: [
+          echo "Running ESLint static analysis",
+          npm run lint,
+          echo "Running TypeScript static analysis",
           npm run build:prod
-
+        ]
   analyze:
-    name: Vulnerability Scan
+    name: Analyze
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -45,7 +38,8 @@ jobs:
         language: [ 'javascript' ]
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
@@ -57,22 +51,3 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
-
-  deployment:
-    name: Deploy to Dev
-    runs-on: ubuntu-latest
-    environment: development
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Release
-      - uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "sholy"
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          branch: "master"
-          healthcheck: "https://sholy.herokuapp.com/health"
-        env:
-          DB_CONNECT_URL: ${{secrets.DB_CONNECT_URL}}
