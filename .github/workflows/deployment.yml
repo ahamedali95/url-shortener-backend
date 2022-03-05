@@ -79,6 +79,5 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           branch: "master"
           healthcheck: "https://sholy.herokuapp.com/health"
-          procfile: "web: npm start"
         env:
-          DB_CONNECT_URL: ${{secrets.DB_CONNECT_URL}}
+          HD_DB_CONNECT_URL: ${{secrets.DB_CONNECT_URL}}

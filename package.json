@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahamedali95/job-portal-backend.git"
+    "url": "git+https://github.com/ahamedali95/url-shortener-backend"
   },
   "author": "Ahamed Abbas",
   "license": "./LICENSE.txt",
   "bugs": {
-    "url": "https://github.com/ahamedali95/job-portal-backend/issues"
+    "url": "https://github.com/ahamedali95/url-shortener-backend/issues"
   },
   "type": "module",
-  "homepage": "https://github.com/ahamedali95/job-portal-backend",
+  "homepage": "https://github.com/ahamedali95/url-shortener-backend",
   "scripts": {
     "generate:doc": "typedoc src",
     "lint": "eslint src",
