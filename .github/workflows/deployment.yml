@@ -15,7 +15,6 @@ jobs:
       fail-fast: true
       matrix:
         node-version: [ '14.18.2' ]
-
     runs-on: ubuntu-latest
 
     steps:
@@ -37,8 +36,6 @@ jobs:
     name: Security Scan
     needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: dev
     permissions:
       actions: read
       contents: read

@@ -20,7 +20,9 @@ const app = express();
 app.use(addRequestId());
 app.use(morganMiddleware);
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+    origin: '*'
+}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

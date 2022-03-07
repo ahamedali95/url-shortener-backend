@@ -24,7 +24,7 @@
     "lint:fix": "eslint src --fix",
     "test:watch": "jest --watchAll",
     "test": "jest --collectCoverage",
-    "start": "tsc-watch --onSuccess \"cross-env NODE_ENV=dev node --experimental-modules --es-module-specifier-resolution=node ./build/src/main/urlProcessor/index.js\"",
+    "start": "tsc-watch --onSuccess \"cross-env NODE_ENV=development node --experimental-modules --es-module-specifier-resolution=node ./build/src/main/urlProcessor/index.js\"",
     "build:prod": "tsc",
     "postinstall": "npm run build:prod"
   },

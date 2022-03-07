@@ -1,1 +1,1 @@
-web: node --experimental-modules --es-module-specifier-resolution=node ./build/src/main/urlProcessor/index.js
+web: cross-env NODE_ENV=production node --experimental-modules --es-module-specifier-resolution=node ./build/src/main/urlProcessor/index.js
