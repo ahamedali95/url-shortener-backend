@@ -1,0 +1,92 @@
+URL Shortener Backend Application
+
+I present you "Shotly" - an url shortener we need!
+
+Shotly is a typical three-tier application that uses client-tier, service-tier and data-tier. Each tier uses some notable technologies.
+In this note, I will describe the service-tier and data-tier. Please checkout the url-shortener-frontend repository to explore the first tier.
+Link: https://github.com/ahamedali95/url-shortener-frontend
+
+Service-tier Overview:
+
+The service-side application is ExpressJS and other accompanying libraries. These tools are:
+
+1. ExpressJS - middleware library build on top of core NodeJS and offers a wide range of features such as routing, controllers
+and a clean slate to develop applications faster.
+2. MongoDB - NoSQL database to store non-relational data in a JSON/BSON based representation.
+3. Mongoose - an object relation mapper that helps to map database records in to JS objects and offers a huge range of
+utils to help facilitate communication between data layer and service layer
+4. TypeScript - programming language the extends JS and offers a vast typed ecosystem.
+5. Morgan/Winston - application loggers that offers a range of log options.
+6. Swagger - API documentation tool that allows users to interact with our services directly via a web interface
+
+Note: Project follows a unconventional folder structure that is inspired from the spring-boot framework. In my opinion,
+it allows for better structuring in relational to our code, resources and tests.
+
+Highlights of my work:
+
+1. Modularized routing for each type of resource that allowed for better organization of routes and maintain one-to-one mapping
+between controllers and services. This made the codebase very easy to navigation and easy to read.
+
+2. Configured logging middleware to log different levels of logs ranging from info, debug, error, etc... that helped
+provide better visualization to track how each HTTP request is being served.
+
+3. Implemented application error management to give insights in to happenings behind each HTTP request in case of failures.
+
+3. Integrated a CI-CD platform with Github Workflow and Heroku Cloud Platform. It allowed me to perform iterative development.
+
+
+Instructions to run the application locally:
+
+1. Please use v14.18.2 of nodeJS or closer to run this application
+2. Install dependencies using `npm ci`
+3. Create `.env` file under `<rootDir>` and then define a key-value pair DB_CONNECT_URL=[VALUE]. VALUE = the
+url which contains database credentials and identification.
+3. Run the application using `npm start` This will start the application at http://localhost:8080
+4. Run the client application as well to see the actual functionality in action. Please refer to the url-shortener-frontend repository for instructions.
+5. Ensure health of the application is in good condition by running http://localhost:8080/api/v1/health
+6. Run the Swagger API documentation at http://localhost:8080/api-docs/ to get a glimpse of our endpoints
+7. Perform static analysis using `npm run lint` and `npm run build:prod`
+8. Checkout other scripts in package.json that allows you to perform other actions
+
+
+Application is deployed to Heroku and running at: https://sholy.herokuapp.com/
+CI-CD visual workflow can be viewed here: https://github.com/ahamedali95/url-shortener-backend/actions
+For in-depth understanding of pipeline details, view: `<rootDir>/.github/workflows/deployment.yml`
+
+Major challenge I faced was with test setup. Since Jest does not support ES6 modules, I have attempted to use babel-jest to transform
+ES6 modules to commonjs modules while test execution but was very unsuccessful. Spent half a day on this.
+
+Thank you for testing out my app!
+- Ahamed
+───────────▓▓▓▓─────────▓▓▓
+──────────▓▓▓▓▓▓▓─────▓▓▓▓▓▓
+───▓▓▓▓────▓▓▓▓▓▓▓───▓▓▓▓▓▓▓
+─▓▓▓▓▓▓▓▓▓───▓▓▓▓▓──▓▓▓▓▓▓
+──▓▓▓▓▓▓▓▓▓▓──▓▓▓▓─▓▓▓▓─────▓▓▓▓
+──────────▓▓▓▓──▓▓─▓▓───▓▓▓▓▓▓▓▓▓▓
+──▓▓▓▓▓▓▓─────────────▓▓▓▓▓▓▓▓▓▓▓▓
+─▓▓▓▓▓▓▓▓▓▓───███████─────────▓▓▓
+▓▓▓▓▓────────███▓▓▓███───▓▓▓▓
+▓▓─────▓▓▓▓▓─███▓▓▓███──▓▓▓▓▓▓▓▓▓
+────▓▓▓▓▓▓▓────█████────────▓▓▓▓▓▓
+─▓▓▓▓▓▓▓▓───▓▓─────────▓▓▓▓───▓▓▓▓
+▓▓▓▓▓▓▓───▓▓▓▓──▓▓─▓▓▓──▓▓▓▓▓──▓▓
+▓▓▓▓▓▓──▓▓▓▓▓──▓▓▓──▓▓▓▓─▓▓▓▓▓
+─▓▓▓───▓▓▓▓▓───▓▓▓──▓▓▓▓▓──▓▓▓▓
+─────▓▓▓▓▓▓▓──▓▓▓▓▓─▓▓▓▓▓▓─▓▓▓▓▓
+─────▓▓▓▓▓▓──▓▓▓▓▓▓──▓▓▓▓▓▓─▓▓▓▓
+──────▓▓▓▓───▓▓▓▓▓▓──▓▓▓▓▓▓──▓▓▓
+─────────────▓▓▓▓▓▓──▓▓▓▓▓▓
+─────────────▓▓▓▓▓─██─▓▓▓▓
+───────────────────██
+──────▓▓───────────██
+───────▓▓▓▓▓───────██
+────────▓▓▓▓▓▓─────██
+──────────▓▓▓▓▓────██───▓▓▓▓▓▓▓▓
+───────────▓▓▓▓▓──██──▓▓▓▓▓▓▓▓
+─────────────▓▓▓─██─▓▓▓▓▓▓▓▓
+────────────────██─▓▓▓▓▓▓
+───────────────██
+──────────────██
+─────────────██
+────────────
