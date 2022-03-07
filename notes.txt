@@ -54,7 +54,7 @@ CI-CD visual workflow can be viewed here: https://github.com/ahamedali95/url-sho
 For in-depth understanding of pipeline details, view: `<rootDir>/.github/workflows/deployment.yml`
 
 Major challenge I faced was with test setup. Since Jest does not support ES6 modules, I have attempted to use babel-jest to transform
-ES6 modules to commonjs modules while test execution but was very unsuccessful. Spent half a day on this.
+ES6 modules to commonjs modules while test execution but was very unsuccessful. Spent half a day on this. I hope we can discuss about this during review.
 
 Thank you for testing out my app!
 - Ahamed
